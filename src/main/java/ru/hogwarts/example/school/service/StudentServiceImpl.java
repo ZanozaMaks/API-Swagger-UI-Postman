@@ -2,40 +2,44 @@ package ru.hogwarts.example.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.example.school.model.Student;
+import ru.hogwarts.example.school.repository.StudentRepository;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Service
 public class StudentServiceImpl implements StudentService {
 
-    private Map<Long, Student> studentMap = new HashMap<>();
+    private final StudentRepository studentRepository;
+    //private Map<Long, Student> studentMap = new HashMap<>();
 
-    private long counterStudentId = 0;
-
-    @Override
-    public Student addStudent(Student student) {
-        long id = counterStudentId++;
-        Student newStudent = new Student(id, student.getName(),student.getAge());
-        studentMap.put(id, newStudent);
-        return null;
+    public StudentServiceImpl(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
     }
 
     @Override
-    public void removeStudent(Long id) {
-        studentMap.remove(id);
+    public Student addStudent(Student student) {
+        Student newStudent = new Student(student.getName());
+        return studentRepository.save(newStudent);
+    }
+
+
+    @Override
+    public Student removeStudent(Long id) {
+        Student studentForDelete = getStudent(id);
+        studentRepository.deleteById(id);
+        return studentForDelete;
 
     }
 
     @Override
     public Student getStudent(Long id) {
-        return studentMap.get(id);
+        return studentRepository.findById(id).get();
     }
 
     @Override
     public Student updateStudent(Long id, Student student) {
-        Student existingStudent = studentMap.get(id);
+        Student existingStudent = getStudent(id);
         existingStudent.setName(student.getName());
         existingStudent.setAge(student.getAge());
         return existingStudent;
@@ -43,10 +47,14 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Student> getStudentByAge(int age) {
-        return studentMap.values().
+        return studentRepository.findAll().
                 stream().
                 filter(student ->
                         student.getAge() == age).
                 toList();
+    }
+
+    public List<Student> getWhenAgeBetween(Integer min, Integer max) {
+        return studentRepository.findAllByAgeBetween(min, max);
     }
 }
