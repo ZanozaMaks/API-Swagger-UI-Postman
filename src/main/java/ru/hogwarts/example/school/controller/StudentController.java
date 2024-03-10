@@ -39,7 +39,7 @@ public class StudentController {
     }
 
     @GetMapping
-    public Collection<Student> getStudentByAge (@RequestParam int age) {
+    public Collection<Student> getStudentByAge(@RequestParam int age) {
         return studentService.getStudentByAge(age);
     }
 
