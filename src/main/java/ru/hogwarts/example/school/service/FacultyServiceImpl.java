@@ -15,7 +15,7 @@ public class FacultyServiceImpl implements  FacultyService {
 
     private long counterFacultyId = 0;
     @Override
-    public Faculty addFaculty(Faculty faculty) {
+    public Faculty addFaculty (Faculty faculty) {
         long id = counterFacultyId;
         counterFacultyId++;
         Faculty newFaculty = new Faculty(id,faculty.getName(), faculty.getColor());
