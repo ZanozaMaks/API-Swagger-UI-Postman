@@ -15,7 +15,7 @@ public class StudentServiceImpl implements StudentService {
     private long counterStudentId = 0;
 
     @Override
-    public Student addStudent(Student student) {
+    public Student addStudent (Student student) {
         long id = counterStudentId++;
         Student newStudent = new Student(id, student.getName(),student.getAge());
         studentMap.put(id, newStudent);
