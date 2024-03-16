@@ -2,11 +2,12 @@ package ru.hogwarts.example.school.controller;
 
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.example.school.model.Faculty;
-import ru.hogwarts.example.school.model.Student;
 import ru.hogwarts.example.school.service.FacultyService;
 
 import java.util.Collection;
 
+@RestController
+@RequestMapping("/faculty")
 public class FacultyController {
 
     private final FacultyService facultyService;
