@@ -1,5 +1,6 @@
 package ru.hogwarts.example.school.service;
 
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -7,6 +8,8 @@ import ru.hogwarts.example.school.model.Student;
 import ru.hogwarts.example.school.repository.StudentRepository;
 
 import java.util.List;
+import java.util.Locale;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -74,4 +77,17 @@ public class StudentServiceImpl implements StudentService {
 
         return studentRepository.findAllByAgeBetween(min, max);
     }
+
+
+    public List<String> GetAllNameStartsWithA() {
+        String firstLetterA = "A";
+        return studentRepository.findAll().stream()
+                .map(Student::getName)
+                .map(String::toUpperCase)
+                .filter(name -> name.startsWith(firstLetterA))
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
 }
+

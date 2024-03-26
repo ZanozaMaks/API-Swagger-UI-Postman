@@ -47,4 +47,11 @@ public class StudentController {
     public List<Student> getWhenAgeBetween(@RequestParam Integer min, @RequestParam Integer max) {
         return studentService.getWhenAgeBetween(min, max);
     }
+
+    @GetMapping ("GetNameStartsWithA")
+    public List<String> getAllNamesStartWithA() {
+        return studentService.GetAllNameStartsWithA();
+    }
+
+
 }
