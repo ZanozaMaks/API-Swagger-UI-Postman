@@ -1,5 +1,8 @@
 package ru.hogwarts.example.school.service;
 
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -21,6 +24,9 @@ import static java.nio.file.StandardOpenOption.CREATE_NEW;
 
 @Service
 public class AvatarService {
+
+    private final Logger logger = LoggerFactory.getLogger(AvatarService.class);
+
     private final AvatarRepository avatarRepository;
 
     private final StudentRepository studentRepository;
@@ -38,6 +44,7 @@ public class AvatarService {
     }
 
     public ResponseEntity <String> uploadAvatar(Long studentId, MultipartFile avatarFile) throws IOException {
+        logger.info("Was invoked method for uploadAvatar ");
         Student student = studentRepository.findById(studentId).get(); // get
         Path filePath = Path.of(avatarsDir, student + "." + getExtensions(avatarFile.getOriginalFilename()));
         Files.createDirectories(filePath.getParent());
@@ -62,10 +69,13 @@ public class AvatarService {
     }
 
     private String getExtensions(String fileName) {
+        logger.info("Was invoked method for getExtensions ");
         return fileName.substring(fileName.lastIndexOf(".") + 1);
     }
 
     public void downloadAvatar(Long id, HttpServletResponse response) throws IOException{
+        logger.info("Was invoked method for downloadAvatar ");
+
         Avatar avatar = avatarRepository.findById(id).get();
         Path path = Path.of(avatar.getFilePath());
         try(InputStream is = Files.newInputStream(path);
@@ -78,6 +88,8 @@ public class AvatarService {
     }
 
     public ResponseEntity<byte[]> downloadAvatarDB(Long id) {
+        logger.info("Was invoked method for downloadAvatarDB ");
+
         Avatar avatar = avatarRepository.findById(id).get();
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.parseMediaType(avatar.getMediaType()));
