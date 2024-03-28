@@ -53,5 +53,9 @@ public class StudentController {
         return studentService.GetAllNameStartsWithA();
     }
 
+    @GetMapping ("getAvgAgeStream")
+    public double getAvgAgeStreamStudent() {
+        return studentService.getAvgAgeStream();
+    }
 
 }

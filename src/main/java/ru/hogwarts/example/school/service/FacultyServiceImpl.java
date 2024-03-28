@@ -10,6 +10,7 @@ import ru.hogwarts.example.school.repository.FacultyRepository;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class FacultyServiceImpl implements  FacultyService {
@@ -61,6 +62,15 @@ public class FacultyServiceImpl implements  FacultyService {
                 filter(faculty ->
                         faculty.getColor().equals(color) ).
                 toList();
+    }
+
+    public String returnTheLongestFacultyName() {
+        logger.info("Was invoked method for returnTheLongestFacultyName ");
+        return facultyRepository.findAll().stream()
+                .map(Faculty::getName)
+                .sorted((name1, name2) -> -1* (name1.length() - name2.length()))
+                .toList()
+                .get(0);
     }
 }
 

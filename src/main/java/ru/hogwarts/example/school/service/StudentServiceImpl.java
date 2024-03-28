@@ -80,6 +80,7 @@ public class StudentServiceImpl implements StudentService {
 
 
     public List<String> GetAllNameStartsWithA() {
+        logger.info("Was invoked method for GetAllNameStartsWithA ");
         String firstLetterA = "A";
         return studentRepository.findAll().stream()
                 .map(Student::getName)
@@ -89,5 +90,11 @@ public class StudentServiceImpl implements StudentService {
                 .collect(Collectors.toList());
     }
 
+    public double getAvgAgeStream() {
+        logger.info("Was invoked method for getAvgAgeStream ");
+        return studentRepository.findAll().stream()
+                .mapToDouble(Student::getAge)
+                .average().orElse(0);
+    }
 }
 
