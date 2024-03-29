@@ -1,5 +1,6 @@
 package ru.hogwarts.example.school.service;
 
+import liquibase.pro.packaged.S;
 import ru.hogwarts.example.school.model.Faculty;
 import ru.hogwarts.example.school.model.Student;
 
@@ -16,4 +17,5 @@ public interface FacultyService {
 
     List<Faculty> getFacultyByColor(Integer color);
 
+    String returnTheLongestFacultyName();
 }

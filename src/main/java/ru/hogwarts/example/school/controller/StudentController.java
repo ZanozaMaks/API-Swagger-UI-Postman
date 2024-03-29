@@ -47,4 +47,23 @@ public class StudentController {
     public List<Student> getWhenAgeBetween(@RequestParam Integer min, @RequestParam Integer max) {
         return studentService.getWhenAgeBetween(min, max);
     }
+
+    @GetMapping ("GetNameStartsWithA")
+    public List<String> getAllNamesStartWithA() {
+        return studentService.GetAllNameStartsWithA();
+    }
+
+    @GetMapping ("getAvgAgeStream")
+    public double getAvgAgeStreamStudent() {
+        return studentService.getAvgAgeStream();
+    }
+    @GetMapping ("/students/print-parallel")
+    public void studentsPrint() {
+        studentService.studentsPrint();
+    }
+    @GetMapping ("/students/print-synchronized")
+    public void studentsPrintSync() {
+        studentService.studentsPrintSync();
+    }
+
 }

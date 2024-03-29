@@ -40,4 +40,10 @@ public class FacultyController {
     public Collection<Faculty> getFacultyByColor(@RequestParam Integer color) {
         return facultyService.getFacultyByColor(color);
     }
+
+    @GetMapping ("TheLongestFacultyName")
+    public String returnTheLongestFacultyName() {
+        return facultyService.returnTheLongestFacultyName();
+    }
+
 }
