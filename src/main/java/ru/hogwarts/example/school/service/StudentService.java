@@ -15,4 +15,7 @@ public interface StudentService {
     List<Student> getWhenAgeBetween(Integer min, Integer max);
     List<String> GetAllNameStartsWithA();
     double getAvgAgeStream();
+
+    void studentsPrint();
+    void studentsPrintSync();
 }

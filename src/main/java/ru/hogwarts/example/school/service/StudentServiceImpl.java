@@ -96,5 +96,49 @@ public class StudentServiceImpl implements StudentService {
                 .mapToDouble(Student::getAge)
                 .average().orElse(0);
     }
+
+    public void studentsPrint () {
+        List<Student> students = studentRepository.findAll();
+        studentPrintThread(students.get(0));
+        studentPrintThread(students.get(1));
+
+        Thread thread1 = new Thread(() -> {
+            studentPrintThread(students.get(2));
+            studentPrintThread(students.get(3));
+        });
+        thread1.start();
+
+        Thread thread2 = new Thread(() -> {
+            studentPrintThread(students.get(4));
+            studentPrintThread(students.get(5));
+        });
+        thread2.start();
+    }
+
+    public void studentsPrintSync () {
+        List<Student> students = studentRepository.findAll();
+        studentsPrintSync(students.get(0));
+        studentsPrintSync(students.get(1));
+
+        Thread thread1 = new Thread(() -> {
+            studentsPrintSync(students.get(2));
+            studentsPrintSync(students.get(3));
+        });
+        thread1.start();
+
+        Thread thread2 = new Thread(() -> {
+            studentsPrintSync(students.get(4));
+            studentsPrintSync(students.get(5));
+        });
+        thread2.start();
+    }
+
+    private void studentPrintThread(Student student) {
+        logger.info("Ttread: {}, Student: {}",Thread.currentThread(),student);
+    }
+
+    private synchronized void studentsPrintSync(Student student) {
+        studentPrintThread(student);
+    }
 }
 

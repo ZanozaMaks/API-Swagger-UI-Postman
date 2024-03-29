@@ -57,5 +57,13 @@ public class StudentController {
     public double getAvgAgeStreamStudent() {
         return studentService.getAvgAgeStream();
     }
+    @GetMapping ("/students/print-parallel")
+    public void studentsPrint() {
+        studentService.studentsPrint();
+    }
+    @GetMapping ("/students/print-synchronized")
+    public void studentsPrintSync() {
+        studentService.studentsPrintSync();
+    }
 
 }
