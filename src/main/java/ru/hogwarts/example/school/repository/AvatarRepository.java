@@ -7,4 +7,6 @@ import ru.hogwarts.example.school.model.Avatar;
 @Repository
 public interface AvatarRepository extends JpaRepository<Avatar,Long> {
 
+
+
 }
