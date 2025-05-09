@@ -13,4 +13,10 @@ public interface StudentService {
 
     List<Student> getStudentByAge(int age);
     List<Student> getWhenAgeBetween(Integer min, Integer max);
+
+
+    int getCount();
+    double getAvgAge();
+    List<Student> getLastFive();
+
 }
